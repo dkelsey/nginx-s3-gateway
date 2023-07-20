@@ -132,7 +132,9 @@ function s3auth(r) {
     const region = process.env['S3_REGION'];
     let server;
     if (S3_STYLE === 'path') {
-        server = process.env['S3_SERVER'] + ':' + process.env['S3_SERVER_PORT'];
+        // adding the port causes the md5 digest of the canonical reqeust to be incorrect.
+        // server = process.env['S3_SERVER'] + ':' + process.env['S3_SERVER_PORT'];
+        server = process.env['S3_SERVER'];
     } else {
         server = process.env['S3_SERVER'];
     }

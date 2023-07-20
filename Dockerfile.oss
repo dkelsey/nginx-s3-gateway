@@ -36,5 +36,8 @@ RUN set -eux \
       libedit2 \
       nginx-module-njs=${NGINX_VERSION}+${NJS_VERSION}-${PKG_RELEASE}; \
     apt-get remove --purge --auto-remove --yes; \
-    rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/nginx.list
+    rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/nginx.list; \
+    mkfifo /var/log/nginx/access.fifo.log /var/log/nginx/error.fifo.log; \
+    chown -R nginx:nginx /var/log/nginx/access.fifo.log /var/log/nginx/error.fifo.log; \
+    chmod a+rw /var/log/nginx/access.fifo.log /var/log/nginx/error.fifo.log
 
